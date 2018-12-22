@@ -9,10 +9,14 @@ const EventIndexPage = ({ data }) => (
     <ul>
       {data.allEventsJson.edges.map(doc => (
         <li key={doc.node.id}>
-          <h2><Link to={`/events/${doc.node.id}`}>{doc.node.title}</Link></h2>
+          <h2>
+            <Link to={`/events/${doc.node.id}`}>{doc.node.title}</Link>
+          </h2>
           <p>{doc.node.descr}</p>
           <p>{doc.node.lineup}</p>
-          {/* {doc.node.poster ? <Img fixed={doc.node.poster.childImageSharp.fixed} /> : null} */}
+          {doc.node.flyerName ? (
+            <Img fixed={doc.node.flyerName.childImageSharp.fixed} />
+          ) : null}
         </li>
       ))}
     </ul>
@@ -21,7 +25,7 @@ const EventIndexPage = ({ data }) => (
 
 export default EventIndexPage
 
-export const query = graphql`  
+export const query = graphql`
   query {
     allEventsJson {
       edges {
@@ -32,7 +36,13 @@ export const query = graphql`
           descr
           cost
           lineup
-          flyerName
+          flyerName {
+            childImageSharp {
+              fixed {
+                ...GatsbyImageSharpFixed
+              }
+            }
+          }
           uid
           urlOrigin
           country

@@ -18,14 +18,20 @@ export default EventDetailTemplate
 
 export const query = graphql`
   query EventDetailTemplate($id: String!) {
-    eventsJson(id: {eq: $id}) {
+    eventsJson(id: { eq: $id }) {
       id
       title
       date
       descr
       cost
       lineup
-      flyerName
+      flyerName {
+        childImageSharp {
+          fixed {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
       uid
       urlOrigin
       country
