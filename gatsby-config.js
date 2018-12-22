@@ -2,22 +2,18 @@ module.exports = {
   siteMetadata: {
     title: 'Techno in Asia',
     description: 'Undergroundtechno events in Asia',
-    keywords: 'techno events, techno events in Asia, underground techno, techno clubs, techno clubs in Asia',
+    keywords:
+      'techno events, techno events in Asia, underground techno, techno clubs, techno clubs in Asia',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
     {
+      // The JSON file contains relative paths to images. These relative paths
+      // will be picked up by the JSON transformer and mapped to File nodes.
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `data`,
-        path: `${__dirname}/data/json`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `flyers`,
-        path: `${__dirname}/data/images`,
+        path: `${__dirname}/data`,
       },
     },
     {
